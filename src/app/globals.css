@@ -66,3 +66,23 @@ body { font-feature-settings: "rlig" 1, "calt" 1; }
 	background-size: 24px 24px;
 }
 */
+
+/* Tailwind v4 utility: global brand background using theme colors */
+@utility bg-brand {
+	background:
+		radial-gradient(1000px 420px at 20% 15%, rgba(255,210,77,0.35), transparent 70%),
+		radial-gradient(1000px 460px at 78% 40%, rgba(255,59,48,0.30), transparent 70%),
+		#ffffff;
+	background-attachment: fixed, fixed, fixed;
+}
+
+/* Tüm bölümlerde aynı sol boşluk ve max genişlik */
+@utility section-wrap {
+	max-width: 1200px; /* istersen 1100/1280 yapabilirsin */
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 1rem; /* px-4 */
+	padding-right: 1rem;
+}
+@media (min-width: 640px){ .section-wrap{ padding-left:1.5rem; padding-right:1.5rem; } } /* sm:px-6 */
+@media (min-width: 1024px){ .section-wrap{ padding-left:2rem; padding-right:2rem; } } /* lg:px-8 */

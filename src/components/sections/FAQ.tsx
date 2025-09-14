@@ -1,30 +1,40 @@
-const faqs = [
-  ["Ne kadar sürede teslim ediyorsunuz?", "Landing projeleri 1-2 hafta; kapsam büyüdükçe planlıyoruz."],
-  ["SEO tarafında ne yapıyorsunuz?", "Teknik SEO, Lighthouse 90+, sitemap/robots, schema ve içerik önerisi."],
-  ["Sonradan sayfa ekleyebilir miyiz?", "Evet—dilim mantığında ek paket olarak büyütüyoruz."],
-  ["Ödeme ve sözleşme süreci nasıl?", "İş planı + milestone’lar, proje başlangıcı ve teslimde dilimli ödeme."],
+"use client";
+
+import { motion } from "framer-motion";
+
+const faq = [
+  { q: "Teslim süresi nedir?", a: "Başlangıç paketleri 1–2 hafta; orta ölçekli projeler 3–6 hafta aralığında." },
+  { q: "Revizyon politikası?", a: "Belirlenen revizyon turu ücretsizdir. Ek talepler dilim bazlı eklenir." },
+  { q: "Bakım / destek veriyor musunuz?", a: "Evet. Aylık bakım ve performans izleme için esnek dilimlerimiz var." },
+  { q: "Kod bize ait mi?", a: "Evet. Versiyon kontrolü ile size ait repoda ilerliyoruz." },
 ];
 
 export default function FAQ() {
   return (
-    <section id="sss" className="bg-neutral-50">
-      <div className="container py-16">
-        <h2 className="text-3xl font-bold">Sık Sorulan Sorular</h2>
+  <div className="section-wrap py-24">
+      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Sık Sorulanlar</h2>
+      <p className="mt-2 max-w-2xl text-neutral-700">Kafanızda kalanları netleştirelim.</p>
 
-        <div className="mt-6 divide-y rounded-2xl border bg-white">
-          {faqs.map(([q, a], idx) => (
-            <details key={idx} className="group">
-              <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 hover:bg-neutral-50">
-                <span className="font-semibold">{q}</span>
-                <span className="ml-4 rounded-full border px-2 py-0.5 text-xs transition group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <div className="px-5 pb-5 text-neutral-700">{a}</div>
-            </details>
-          ))}
-        </div>
+      <div className="mx-auto mt-10 max-w-3xl space-y-3">
+        {faq.map((f, i) => (
+          <motion.details
+            key={f.q}
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.45, delay: i * 0.03, ease: [0.16, 1, 0.3, 1] }}
+            className="group rounded-xl border border-black/10 bg-white/95 p-4 shadow-sm open:shadow-md"
+          >
+            <summary className="cursor-pointer select-none list-none text-sm font-semibold leading-6 outline-none">
+              <span className="mr-2 inline-block rotate-0 transition group-open:rotate-90 text-sauce-red">›</span>
+              {f.q}
+            </summary>
+            <div className="pt-2 text-sm text-neutral-700">{f.a}</div>
+          </motion.details>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
+
+

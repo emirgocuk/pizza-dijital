@@ -42,8 +42,7 @@ const child: Variants = {
 };
 export default function Services() {
   return (
-    <section id="hizmetler" className="relative overflow-hidden" data-page>
-      <div className="container py-24">
+    <div className="section-wrap py-24">
         <Reveal>
           <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">Hizmetlerimiz</h2>
         </Reveal>
@@ -59,7 +58,8 @@ export default function Services() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4"
+          /* 2 sütun – 4 kutu -> 2×2 */
+          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {items.map((it) => (
             <motion.div
@@ -73,8 +73,7 @@ export default function Services() {
               <span className="absolute inset-x-0 bottom-0 h-1 rounded-b-2xl bg-gradient-to-r from-pizza-yellow via-transparent to-pizza-red opacity-60 transition group-hover:opacity-90" />
             </motion.div>
           ))}
-        </motion.div>
-      </div>
-    </section>
+    </motion.div>
+  </div>
   );
 }
