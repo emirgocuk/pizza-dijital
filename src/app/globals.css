@@ -1,26 +1,68 @@
+/* --- Global site background (sabit, her bölümde aynı) --- */
+:root { --header-h: 100px; }
+html { scroll-padding-top: var(--header-h); }
+
+/* 1) Zemin tamamen beyaz */
+html, body { background: #fff; }
+
+/* ---- Global animated blobs (site genelinde) ---- */
+.bg-blobs {
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background: #fff;           /* Zemin gerçek beyaz */
+}
+
+/* ortak blob stilleri */
+.bg-blobs .blob {
+	position: absolute;
+	width: 80vw;                /* ekrana göre esner */
+	max-width: 900px;
+	aspect-ratio: 2.2 / 1;      /* yayvan elips */
+	filter: blur(36px);
+	opacity: .38;               /* yoğunluk: .30–.45 arası oynatabilirsin */
+	will-change: transform;
+	mix-blend-mode: normal;     /* istersen 'multiply' deneyebilirsin */
+	transform: translate3d(0,0,0) rotate(0deg); /* JS bunu sürekli güncelliyor */
+	/* yumuşak küçük nefes alma animasyonu */
+	animation: blob-breathe 8s ease-in-out infinite alternate;
+}
+
+/* sarı */
+.bg-blobs .blob-yellow {
+	background: radial-gradient(closest-side, rgba(255,210,77,.65), rgba(255,210,77,0) 70%);
+}
+
+/* kırmızı */
+.bg-blobs .blob-red {
+	background: radial-gradient(closest-side, rgba(255,59,48,.55), rgba(255,59,48,0) 70%);
+}
+
+@keyframes blob-breathe {
+	from { filter: blur(32px); opacity: .36; }
+	to   { filter: blur(40px); opacity: .42; }
+}
+/* Anchor linklerde header kadar boşluk bırak (Navbar yüksekliğine göre) */
+:root { --header-h: 100px; }
+html { scroll-padding-top: var(--header-h); }
+
+/* Windows tekerlek ivmesini azaltıp Lenis’e bırakmak için (isteğe bağlı) */
+* { overscroll-behavior: contain; }
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@source "../components/**/*.{js,ts,jsx,tsx,mdx}";
+@source "../app/**/*.{js,ts,jsx,tsx,mdx}";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* Global ufak ayarlar */
+html, body { height: 100%; }
+html { scroll-behavior: smooth; }
+body { font-feature-settings: "rlig" 1, "calt" 1; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* (İsteğe bağlı) yardımcılar — istersen ekleyebilirsin
+.bg-grid { background-image:
+	linear-gradient(to right, rgba(0,0,0,.06) 1px, transparent 1px),
+	linear-gradient(to bottom, rgba(0,0,0,.06) 1px, transparent 1px);
+	background-size: 24px 24px;
 }
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+*/
